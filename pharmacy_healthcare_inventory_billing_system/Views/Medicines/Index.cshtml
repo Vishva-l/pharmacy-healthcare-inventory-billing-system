@@ -1,0 +1,141 @@
+@model IEnumerable<pharmacy_healthcare_inventory_billing_system.Models.Medicine>
+
+@{ 
+    ViewData["Title"] = "Medicine Inventory"; 
+}
+
+<div class="container mt-4">
+    @if (TempData["Success"] != null) { <div class="alert alert-success">@TempData["Success"]</div> }
+    @if (TempData["Error"] != null) { <div class="alert alert-danger">@TempData["Error"]</div> }
+
+    <div class="d-flex justify-content-between mb-3">
+
+        <h2>Medicine Inventory</h2>
+
+        <a asp-action="Create"
+           class="btn btn-success">
+            Add Medicine
+        </a>
+
+    </div>
+
+    <form asp-action="Index"
+          method="get"
+          class="row mb-4">
+
+        <div class="col-md-10">
+
+            <input type="text"
+                   name="search"
+                   value="@ViewBag.Search"
+                   class="form-control"
+                   placeholder="Search medicine..." />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-primary w-100">
+                Search
+            </button>
+
+        </div>
+
+    </form>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Name</th>
+                <th>Generic Name</th>
+                <th>Manufacturer</th>
+                <th>Batch</th>
+                <th>Expiry</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Prescription</th>
+                <th>Action</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                var lowStock =
+                    item.StockQuantity <= item.ReorderLevel;
+
+                var expired =
+                    item.ExpiryDate < DateTime.Today;
+
+                <tr class="@(expired ? "table-danger" : "")">
+
+                    <td>@item.Name</td>
+
+                    <td>@item.GenericName</td>
+
+                    <td>@item.Manufacturer</td>
+
+                    <td>@item.BatchNumber</td>
+
+                    <td>
+                        @item.ExpiryDate.ToString("dd-MM-yyyy")
+                    </td>
+
+                    <td>
+
+                        @item.StockQuantity
+
+                        @if (lowStock)
+                        {
+                            <span class="badge bg-warning">
+                                Low
+                            </span>}
+
+                    </td>
+
+                    <td>
+                        ₹@item.SellingPrice.ToString("N2")
+                    </td>
+
+                    <td>
+                        @(item.RequiresPrescription
+                            ? "Yes"
+                            : "No")
+                    </td>
+
+                    <td>
+
+                        <a asp-action="Edit"
+                           asp-route-id="@item.MedicineId"
+                           class="btn btn-sm btn-primary">
+                            Edit
+                        </a>
+
+                        <a asp-action="Details"
+                           asp-route-id="@item.MedicineId"
+                           class="btn btn-sm btn-info">
+                            Details
+                        </a>
+
+                        <a asp-controller="Cart"
+                           asp-action="Add"
+                           asp-route-id="@item.MedicineId"
+                           class="btn btn-sm btn-success">
+                            Cart
+                        </a>
+
+                    </td>
+
+                </tr>
+       }
+
+        </tbody>
+
+    </table>
+
+</div>

@@ -1,0 +1,40 @@
+@model pharmacy_healthcare_inventory_billing_system.Models.Sale
+@{
+    ViewData["Title"] = "Bill Details";
+}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between">
+        <h2>Bill #@Model.SaleId</h2>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+    </div>
+    <p><strong>Customer:</strong> @Model.CustomerName</p>
+    <p><strong>Date:</strong> @Model.SaleDate.ToString("dd-MM-yyyy HH:mm")</p>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr><th>Medicine</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.Medicine?.Name</td>
+                <td>@item.Quantity</td>
+                <td>₹@item.UnitPrice.ToString("N2")</td>
+                <td>₹@item.Total.ToString("N2")</td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+            <tr><th colspan="3" class="text-end">Grand Total</th><th>₹@Model.TotalAmount.ToString("N2")</th></tr>
+        </tfoot>
+    </table>
+
+    <div class="alert alert-success">
+        <strong>Payment:</strong> @Model.Payment?.PaymentMethod
+        @if (!string.IsNullOrEmpty(Model.Payment?.TransactionId))
+        {
+            <span> | <strong>Transaction:</strong> @Model.Payment.TransactionId</span>
+        }
+    </div>
+</div>

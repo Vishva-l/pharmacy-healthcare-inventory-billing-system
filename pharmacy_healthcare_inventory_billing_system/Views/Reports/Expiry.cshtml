@@ -1,0 +1,78 @@
+@model IEnumerable<pharmacy_healthcare_inventory_billing_system.Models.Medicine>
+
+@{
+    ViewData["Title"] = "Expiry Alert";
+}
+
+<div class="container mt-4">
+
+    <h2>
+        Expiry Alert Report
+    </h2>
+
+    <p class="text-muted">
+        Medicines expiring within next 30 days.
+    </p>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-danger">
+
+            <tr>
+                <th>Medicine</th>
+                <th>Batch</th>
+                <th>Stock</th>
+                <th>Expiry</th>
+                <th>Days Remaining</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                var days =
+                    (item.ExpiryDate.Date
+                    - DateTime.Today).Days;
+
+                <tr>
+
+                    <td>
+                        @item.Name
+                    </td>
+
+                    <td>
+                        @item.BatchNumber
+                    </td>
+
+                    <td>
+                        @item.StockQuantity
+                    </td>
+
+                    <td>
+                        @item.ExpiryDate
+                        .ToString("dd-MM-yyyy")
+                    </td>
+
+                    <td>
+
+                        <span class="badge
+                            @(days <= 7
+                                ? "bg-danger"
+                                : "bg-warning")">
+
+                            @days days
+
+                        </span>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

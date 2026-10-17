@@ -1,0 +1,47 @@
+@model IEnumerable<pharmacy_healthcare_inventory_billing_system.Models.Sale>
+@{
+    ViewData["Title"] = "Sales Records";
+}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Sales / Billing Records</h2>
+        <a asp-controller="Medicines" asp-action="Index" class="btn btn-primary">New Bill</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No sales records found. Completed bills will appear here.</div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Bill No.</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>Payment</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var sale in Model)
+            {
+                <tr>
+                    <td>#@sale.SaleId</td>
+                    <td>@sale.SaleDate.ToString("dd-MM-yyyy HH:mm")</td>
+                    <td>@sale.CustomerName</td>
+                    <td>@sale.Items.Sum(x => x.Quantity)</td>
+                    <td>₹@sale.TotalAmount.ToString("N2")</td>
+                    <td>@sale.Payment?.PaymentMethod</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@sale.SaleId" class="btn btn-sm btn-info">View</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>

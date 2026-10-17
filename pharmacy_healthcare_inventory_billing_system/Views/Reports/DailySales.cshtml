@@ -1,0 +1,152 @@
+@model IEnumerable<pharmacy_healthcare_inventory_billing_system.Models.Payment>
+
+@{
+    ViewData["Title"] = "Daily Sales";
+}
+
+<div class="container mt-4">
+
+    <h2>
+        Daily Sales Ledger
+    </h2>
+
+    <form method="get"
+          asp-action="DailySales"
+          class="mb-4">
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <input type="date"
+                       name="date"
+                       value="@(((DateTime)ViewBag.SelectedDate).ToString("yyyy-MM-dd"))"
+                       class="form-control" />
+
+            </div>
+
+            <div class="col-md-2">
+
+                <button type="submit"
+                        class="btn btn-primary">
+                    View
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="card bg-success text-white">
+
+                <div class="card-body">
+
+                    <h5>Cash</h5>
+
+                    <h3>
+                        ₹@(((decimal)ViewBag.Cash)
+                            .ToString("N2"))
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card bg-primary text-white">
+
+                <div class="card-body">
+
+                    <h5>Digital</h5>
+
+                    <h3>
+                        ₹@(((decimal)ViewBag.Digital)
+                            .ToString("N2"))
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card bg-dark text-white">
+
+                <div class="card-body">
+
+                    <h5>Total</h5>
+
+                    <h3>
+                        ₹@(((decimal)ViewBag.Total)
+                            .ToString("N2"))
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr />
+
+    <table class="table table-bordered">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Sale</th>
+                <th>Time</th>
+                <th>Payment</th>
+                <th>Transaction</th>
+                <th>Amount</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        #@item.SaleId
+                    </td>
+
+                    <td>
+                        @item.PaymentDate
+                        .ToString("HH:mm:ss")
+                    </td>
+
+                    <td>
+                        @item.PaymentMethod
+                    </td>
+
+                    <td>
+                        @item.TransactionId
+                    </td>
+
+                    <td>
+                        ₹@item.Amount.ToString("N2")
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

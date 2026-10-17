@@ -1,0 +1,89 @@
+@model IEnumerable<pharmacy_healthcare_inventory_billing_system.Models.Prescription>
+
+@{
+    ViewData["Title"] = "Prescriptions";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between">
+
+        <h2>Prescriptions</h2>
+
+        <a asp-action="Upload"
+           class="btn btn-success">
+            Upload Prescription
+        </a>
+
+    </div>
+
+    <table class="table table-bordered mt-3">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Uploaded</th>
+                <th>Medicines</th>
+                <th>Action</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @item.PatientName
+                    </td>
+
+                    <td>
+                        @item.DoctorName
+                    </td>
+
+                    <td>
+                        @item.UploadedAt
+                        .ToString("dd-MM-yyyy HH:mm")
+                    </td>
+
+                    <td>
+
+                        @foreach (var medicine
+                           in item.Items)
+                        {
+                            <span class="badge bg-info text-dark">
+
+                                @medicine.Medicine.Name
+
+                                x @medicine.Quantity
+
+                            </span>
+                        }
+
+                    </td>
+
+                    <td>
+
+                        <a asp-controller="Cart"
+                           asp-action="AddPrescription"
+                           asp-route-prescriptionId="@item.PrescriptionId"
+                           class="btn btn-sm btn-success">
+
+                            Add All to Cart
+
+                        </a>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

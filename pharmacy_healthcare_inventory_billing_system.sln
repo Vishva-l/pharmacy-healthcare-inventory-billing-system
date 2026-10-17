@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pharmacy_healthcare_inventory_billing_system", "pharmacy_healthcare_inventory_billing_system\pharmacy_healthcare_inventory_billing_system.csproj", "{FB614364-FE61-4D90-BC41-52E880CB924D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB614364-FE61-4D90-BC41-52E880CB924D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB614364-FE61-4D90-BC41-52E880CB924D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB614364-FE61-4D90-BC41-52E880CB924D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB614364-FE61-4D90-BC41-52E880CB924D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5FE6D8D7-090D-40CB-936D-F64BCC27F61F}
+	EndGlobalSection
+EndGlobal

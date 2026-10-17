@@ -1,0 +1,93 @@
+@model pharmacy_healthcare_inventory_billing_system.Models.Sale
+
+@{
+    ViewData["Title"] = "Payment Successful";
+}
+
+<div class="container mt-4">
+
+    <div class="alert alert-success">
+
+        <h3>
+            Payment Successful
+        </h3>
+
+        <p>
+            Invoice:
+            <strong>
+                #@Model.SaleId
+            </strong>
+        </p>
+
+        <p>
+            Customer:
+            <strong>
+                @Model.CustomerName
+            </strong>
+        </p>
+
+        <p>
+            Payment:
+            <strong>
+                @Model.Payment.PaymentMethod
+            </strong>
+        </p>
+
+    </div>
+
+    <table class="table table-bordered">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Medicine</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+
+                    <td>
+                        @item.Medicine.Name
+                    </td>
+
+                    <td>
+                        @item.Quantity
+                    </td>
+
+                    <td>
+                        ₹@item.UnitPrice.ToString("N2")
+                    </td>
+
+                    <td>
+                        ₹@item.Total.ToString("N2")
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+    <h3 class="text-end">
+
+        Total:
+        ₹@Model.TotalAmount.ToString("N2")
+
+    </h3>
+
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="btn btn-primary">
+        Dashboard
+    </a>
+
+</div>

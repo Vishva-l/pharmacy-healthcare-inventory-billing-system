@@ -1,0 +1,191 @@
+@model pharmacy_healthcare_inventory_billing_system.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">
+        Pharmacy & Healthcare Dashboard
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="card bg-primary text-white mb-3">
+
+                <div class="card-body">
+
+                    <h5>Total Medicines</h5>
+
+                    <h2>
+                        @Model.TotalMedicines
+                    </h2>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card bg-warning mb-3">
+
+                <div class="card-body">
+
+                    <h5>Low Stock</h5>
+
+                    <h2>
+                        @Model.LowStockMedicines
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card bg-danger text-white mb-3">
+
+                <div class="card-body">
+
+                    <h5>Expiry - 30 Days</h5>
+
+                    <h2>
+                        @Model.ExpiringMedicines
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card bg-success text-white mb-3">
+
+                <div class="card-body">
+
+                    <h5>Today's Sales</h5>
+
+                    <h2>
+                        ₹@Model.TodaySales.ToString("N2")
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <h5>Today's Orders</h5>
+
+                    <h3>
+                        @Model.TodayOrders
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <h5>Cash Collection</h5>
+
+                    <h3>
+                        ₹@Model.TodayCash.ToString("N2")
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card mb-3">
+
+                <div class="card-body">
+
+                    <h5>Digital Collection</h5>
+
+                    <h3>
+                        ₹@Model.TodayDigital.ToString("N2")
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr />
+
+    <div class="row mt-3">
+
+        <div class="col-md-3">
+
+            <a asp-controller="Medicines"
+               asp-action="Index"
+               class="btn btn-primary w-100">
+                Medicines
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a asp-controller="Prescriptions"
+               asp-action="Upload"
+               class="btn btn-success w-100">
+                Prescription
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a asp-controller="Cart"
+               asp-action="Index"
+               class="btn btn-warning w-100">
+                Billing
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a asp-controller="Reports"
+               asp-action="Expiry"
+               class="btn btn-danger w-100">
+                Reports
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

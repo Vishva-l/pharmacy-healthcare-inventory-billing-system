@@ -1,0 +1,73 @@
+@model pharmacy_healthcare_inventory_billing_system.ViewModels.CheckoutViewModel
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="container mt-4">
+
+    <h2>Checkout</h2>
+
+    <form asp-action="Index"
+          method="post">
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger">
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="CustomerName"
+                   class="form-label">
+                Customer Name
+            </label>
+
+            <input asp-for="CustomerName"
+                   class="form-control" />
+
+            <span asp-validation-for="CustomerName"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="PaymentMethod"
+                   class="form-label">
+                Payment Method
+            </label>
+
+            <select asp-for="PaymentMethod"
+                    class="form-select">
+
+                <option value="Cash">
+                    Cash
+                </option>
+
+                <option value="UPI">
+                    UPI
+                </option>
+
+                <option value="Card">
+                    Card
+                </option>
+
+                <option value="Online">
+                    Online Payment
+                </option>
+
+            </select>
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-success">
+
+            Complete Payment
+
+        </button>
+
+    </form>
+
+</div>

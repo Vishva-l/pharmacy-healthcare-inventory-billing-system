@@ -1,0 +1,61 @@
+@model IEnumerable<pharmacy_healthcare_inventory_billing_system.ViewModels.TopMedicineViewModel>
+
+@{
+    ViewData["Title"] = "Top Sold Medicines";
+}
+
+<div class="container mt-4">
+
+    <h2>
+        Top Sold Medicines
+    </h2>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Rank</th>
+                <th>Medicine</th>
+                <th>Quantity Sold</th>
+                <th>Revenue</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @{
+                int rank = 1;
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @rank
+                    </td>
+
+                    <td>
+                        @item.MedicineName
+                    </td>
+
+                    <td>
+                        @item.QuantitySold
+                    </td>
+
+                    <td>
+                        ₹@item.Revenue.ToString("N2")
+                    </td>
+
+                </tr>
+
+                rank++;
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

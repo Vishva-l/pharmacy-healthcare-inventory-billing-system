@@ -1,0 +1,107 @@
+@model pharmacy_healthcare_inventory_billing_system.ViewModels.PrescriptionUploadViewModel
+
+
+@{
+    ViewData["Title"] = "Upload Prescription";
+}
+
+<div class="container mt-4">
+
+    <h2>Upload Prescription</h2>
+
+    <form asp-action="Upload"
+          method="post"
+          enctype="multipart/form-data">
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger">
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="PatientName"
+                   class="form-label">
+                Patient Name
+            </label>
+
+            <input asp-for="PatientName"
+                   class="form-control" />
+
+            <span asp-validation-for="PatientName"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="DoctorName"
+                   class="form-label">
+                Doctor Name
+            </label>
+
+            <input asp-for="DoctorName"
+                   class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="PrescriptionFile"
+                   class="form-label">
+                Prescription File
+            </label>
+
+            <input asp-for="PrescriptionFile"
+                   type="file"
+                   class="form-control"
+                   accept=".jpg,.jpeg,.png,.pdf" />
+
+        </div>
+
+        <div class="alert alert-info">
+
+            Enter medicine names separated by commas.
+
+            Example:
+
+            <strong>
+                Paracetamol 500mg, Cetirizine 10mg
+            </strong>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="MedicineNames"
+                   class="form-label">
+                Medicines
+            </label>
+
+            <input asp-for="MedicineNames"
+                   class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="Quantity"
+                   class="form-label">
+                Quantity
+            </label>
+
+            <input asp-for="Quantity"
+                   type="number"
+                   min="1"
+                   class="form-control" />
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-success">
+            Upload & Process
+        </button>
+
+    </form>
+
+</div>

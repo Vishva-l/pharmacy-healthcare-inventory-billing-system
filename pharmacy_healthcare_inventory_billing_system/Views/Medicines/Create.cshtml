@@ -1,0 +1,29 @@
+@model pharmacy_healthcare_inventory_billing_system.Models.Medicine
+@{
+    ViewData["Title"] = "Add Medicine";
+}
+<div class="container mt-4">
+    <h2>Add Medicine</h2>
+    <hr />
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        <div class="row">
+            <div class="col-md-6 mb-3"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+            <div class="col-md-6 mb-3"><label asp-for="GenericName" class="form-label"></label><input asp-for="GenericName" class="form-control" /><span asp-validation-for="GenericName" class="text-danger"></span></div>
+            <div class="col-md-6 mb-3"><label asp-for="Manufacturer" class="form-label"></label><input asp-for="Manufacturer" class="form-control" /><span asp-validation-for="Manufacturer" class="text-danger"></span></div>
+            <div class="col-md-6 mb-3"><label asp-for="BatchNumber" class="form-label"></label><input asp-for="BatchNumber" class="form-control" /><span asp-validation-for="BatchNumber" class="text-danger"></span></div>
+            <div class="col-md-6 mb-3"><label asp-for="ExpiryDate" class="form-label"></label><input asp-for="ExpiryDate" type="date" class="form-control" /><span asp-validation-for="ExpiryDate" class="text-danger"></span></div>
+            <div class="col-md-6 mb-3"><label asp-for="Category" class="form-label"></label><input asp-for="Category" class="form-control" /><span asp-validation-for="Category" class="text-danger"></span></div>
+            <div class="col-md-4 mb-3"><label asp-for="StockQuantity" class="form-label"></label><input asp-for="StockQuantity" type="number" min="0" class="form-control" /><span asp-validation-for="StockQuantity" class="text-danger"></span></div>
+            <div class="col-md-4 mb-3"><label asp-for="ReorderLevel" class="form-label"></label><input asp-for="ReorderLevel" type="number" min="0" class="form-control" /><span asp-validation-for="ReorderLevel" class="text-danger"></span></div>
+            <div class="col-md-4 mb-3"><label asp-for="PurchasePrice" class="form-label"></label><input asp-for="PurchasePrice" type="number" min="0" step="0.01" class="form-control" /><span asp-validation-for="PurchasePrice" class="text-danger"></span></div>
+            <div class="col-md-6 mb-3"><label asp-for="SellingPrice" class="form-label"></label><input asp-for="SellingPrice" type="number" min="0" step="0.01" class="form-control" /><span asp-validation-for="SellingPrice" class="text-danger"></span></div>
+            <div class="col-md-6 mb-3 form-check mt-4"><input asp-for="RequiresPrescription" class="form-check-input" /><label asp-for="RequiresPrescription" class="form-check-label"></label></div>
+        </div>
+        <button type="submit" class="btn btn-success">Save Medicine</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

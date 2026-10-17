@@ -1,0 +1,42 @@
+@model pharmacy_healthcare_inventory_billing_system.ViewModels.CartViewModel
+@{
+    ViewData["Title"] = "Billing Cart";
+}
+<div class="container mt-4">
+    <h2>Billing Cart</h2>
+    @if (TempData["Error"] != null) { <div class="alert alert-danger">@TempData["Error"]</div> }
+
+    @if (!Model.Items.Any())
+    {
+        <div class="alert alert-info">Cart is empty. Add medicines from the Medicine list.</div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark"><tr><th>Medicine</th><th>Quantity</th><th>Price</th><th>Total</th><th>Action</th></tr></thead>
+            <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.MedicineName</td>
+                    <td>
+                        <form asp-action="Update" method="post" class="d-flex gap-2">
+                            <input type="hidden" name="id" value="@item.MedicineId" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control" style="width:90px" />
+                            <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                            @Html.AntiForgeryToken()
+                        </form>
+                    </td>
+                    <td>₹@item.UnitPrice.ToString("N2")</td>
+                    <td>₹@item.Total.ToString("N2")</td>
+                    <td><a asp-action="Remove" asp-route-id="@item.MedicineId" class="btn btn-sm btn-danger">Remove</a></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <div class="text-end">
+            <h3>Grand Total: ₹@Model.GrandTotal.ToString("N2")</h3>
+            <a asp-controller="Checkout" asp-action="Index" class="btn btn-success">Proceed to Checkout</a>
+        </div>
+    }
+</div>
