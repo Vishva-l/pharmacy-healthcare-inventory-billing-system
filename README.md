@@ -77,6 +77,7 @@ Screenshots of the application's dashboard, medicine inventory, billing pages, a
 
 ## Author
 
+Vishva
 MCA Student Project
 
 ## Disclaimer
